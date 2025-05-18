@@ -19,7 +19,7 @@ public class RoomActiveBookingsStatistics extends StatisticsTemplate {
 
     @Override
     protected void fetchData() {
-        activeBookings = bookingRepository.findByStatus(BookingStatus.PENDING);
+        activeBookings = bookingRepository.findByStatus(BookingStatus.CONFIRMED);
     }
 
     @Override
