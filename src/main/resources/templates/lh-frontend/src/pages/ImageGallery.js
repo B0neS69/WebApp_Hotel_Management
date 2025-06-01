@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/ImageGallery.css"; // стилі в окремому файлі
+import "../styles/ImageGallery.css";
 
 const ImageGallery = ({ images }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -23,17 +23,29 @@ const ImageGallery = ({ images }) => {
     };
 
     return (
-        <div>
-            <div className="gallery">
-                {images.map((img, i) => (
+        <div className="custom-gallery">
+            {images.length > 0 && (
+                <div className="main-image" onClick={() => openModal(0)}>
                     <img
-                        key={i}
-                        src={`http://localhost:8080${img.imageUrl}`}
-                        alt={`image-${i}`}
-                        onClick={() => openModal(i)}
-                        className="thumbnail"
+                        src={`http://localhost:8080${images[0].imageUrl}`}
+                        alt="Main"
                     />
+                </div>
+            )}
+
+            <div className="side-thumbnails">
+                {images.slice(1, 4).map((img, i) => (
+                    <div key={i + 1} className="side-thumb" onClick={() => openModal(i + 1)}>
+                        <img src={`http://localhost:8080${img.imageUrl}`} alt={`thumb-${i + 1}`} />
+                    </div>
                 ))}
+
+                {images.length > 4 && (
+                    <div className="side-thumb more-images" onClick={() => openModal(4)}>
+                        <img src={`http://localhost:8080${images[4].imageUrl}`} alt="more" />
+                        <div className="overlay">+{images.length - 4}</div>
+                    </div>
+                )}
             </div>
 
             {isOpen && (

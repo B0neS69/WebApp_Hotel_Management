@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import '../styles/myBookingsStyles.css';
+
 
 const MyBookings = () => {
     const [bookings, setBookings] = useState([]);
@@ -16,6 +18,7 @@ const MyBookings = () => {
             });
         }).then(res => {
             setBookings(res.data);
+            console.log(res.data)
         }).catch(err => {
             console.error("Помилка завантаження бронювань:", err);
         });
@@ -32,14 +35,35 @@ const MyBookings = () => {
             alert(err.response?.data || "Не вдалося скасувати бронювання.");
         }
     };
+    const isCancelable = (startDate, status) => {
+        if (status !== "PENDING") return false;
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        const bookingDate = new Date(startDate);
+
+        // Обнулення часу (важливо для коректного порівняння)
+        bookingDate.setHours(0, 0, 0, 0);
+        tomorrow.setHours(0, 0, 0, 0);
+
+        return bookingDate > tomorrow;
+    };
+    const formatDate = (isoDateStr) => {
+        const date = new Date(isoDateStr);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // бо getMonth() з 0
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+    };
 
     return (
-        <div>
+        <div className="my-bookings-container">
             <h2>Мої бронювання</h2>
             {bookings.length === 0 ? (
                 <p>Немає активних бронювань.</p>
             ) : (
-                <table border="1" cellPadding="8" style={{ width: "100%", textAlign: "center" }}>
+                <table>
                     <thead>
                     <tr>
                         <th>ID</th>
@@ -55,17 +79,18 @@ const MyBookings = () => {
                     {bookings.map(booking => (
                         <tr key={booking.id}>
                             <td>{booking.id}</td>
-                            <td>{booking.room?.type}</td>
-                            <td>{booking.startDate}</td>
-                            <td>{booking.endDate}</td>
+                            <td>{booking.roomNumber}</td>
+                            <td>{formatDate(booking.startDate)}</td>
+                            <td>{formatDate(booking.endDate)}</td>
                             <td>{booking.price} грн</td>
                             <td>{booking.status}</td>
                             <td>
-                                {booking.status === "PENDING" && new Date(booking.startDate) > new Date(Date.now() + 24 * 60 * 60 * 1000) ? (
+                                {isCancelable(booking.startDate, booking.status) ? (
                                     <button onClick={() => handleCancel(booking.id)}>❌ Скасувати</button>
                                 ) : (
                                     "-"
                                 )}
+
                             </td>
                         </tr>
                     ))}
@@ -74,6 +99,7 @@ const MyBookings = () => {
             )}
         </div>
     );
+
 };
 
 export default MyBookings;

@@ -16,7 +16,11 @@ const Home = () => {
             .catch(err => console.error("Помилка при завантаженні номерів:", err));
 
         axios.get("http://localhost:8080/api/reviews/top-rated")
-            .then(res => setTopReviews(res.data))
+            .then(res => {
+                // Фільтрація відгуків із рейтингом 4 або 5
+                const filtered = res.data.filter(r => r.rating >= 4);
+                setTopReviews(filtered);
+            })
             .catch(err => console.error("Помилка при завантаженні відгуків:", err));
     }, []);
 
@@ -25,44 +29,71 @@ const Home = () => {
         infinite: true,
         speed: 500,
         slidesToShow: 1,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000
     };
 
     return (
         <div className="home-container">
             <h1>Ласкаво просимо в LuxHost!</h1>
-            <p>Забронюйте найкращі номери за доступними цінами.</p>
+            <p className="p-container">Забронюйте найкращі номери за доступними цінами.</p>
             <Link to="/rooms" className="btn">Переглянути номери</Link>
 
-            <h2 style={{ marginTop: "40px" }}>🏆 Найдорожчі номери</h2>
-            <Slider {...sliderSettings}>
-                {topRooms.map(room => (
-                    <div key={room.id}>
-                        <h3>{room.type}</h3>
-                        {room.images && room.images.length > 0 && (
-                            <img
-                                src={`http://localhost:8080${room.images[0].imageUrl}`}
-                                alt={room.type}
-                                style={{ width: "100%", height: "400px", objectFit: "cover" }}
-                            />
-                        )}
-                        <p style={{ fontWeight: "bold" }}>{room.price} грн/доба</p>
-                    </div>
-                ))}
-            </Slider>
+            {/* Топ кімнати */}
 
-            <h2 style={{ marginTop: "40px" }}>🌟 Відгуки з високим рейтингом</h2>
-            {topReviews.length > 0 ? (
-                topReviews.map((review, i) => (
-                    <div key={i} className="review-card">
-                        <strong>Користувач:</strong> {review.authorName} <br />
-                        <strong>Рейтинг:</strong> {review.rating}/5 <br />
-                        <strong>Відгук:</strong> {review.comment}
+            <div className="section-box">
+                <h2>🏆 Наші перлини</h2>
+                <Slider
+                    {...sliderSettings}
+                    autoplay={true}
+                    autoplaySpeed={3000}
+                    pauseOnHover={true}
+                >
+                    {topRooms.map(room => (
+                        <div key={room.id} className="carousel-div">
+                            <Link to={`/rooms/${room.id}`} className="carousel-slide">
+                                <h3>{room.type}</h3>
+                                {room.images && room.images.length > 0 && (
+                                    <img
+                                        src={`http://localhost:8080${room.images[0].imageUrl}`}
+                                        alt={room.type}
+                                        style={{
+                                            width: "100%",
+                                            height: "380px",
+                                            objectFit: "cover",
+                                            borderRadius: "8px",
+                                        }}
+                                    />
+                                )}
+                                <p style={{fontWeight: "bold", marginTop: "10px"}}>{room.price} грн/доба</p>
+                            </Link>
+                        </div>
+                    ))}
+                </Slider>
+            </div>
+
+            {/* Відгуки */}
+            <h1 style={{ marginTop: "40px" }}>🌟 Відгуки наших клієнтів</h1>
+            <div className="section-box">
+
+                {topReviews.length > 0 ? (
+                    <div className="reviews-marquee">
+                        <div className="reviews-track">
+                            {[...topReviews, ...topReviews].map((review, i) => (
+                                <div key={i} className="review-card moving">
+                                    <strong>{review.authorName}</strong><br />
+                                    Рейтинг: {review.rating}/5<br />
+                                    {review.comment}
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                ))
-            ) : (
-                <p>Немає відгуків з рейтингом 4-5.</p>
-            )}
+                ) : (
+                    <p>Немає відгуків з рейтингом 4-5.</p>
+                )}
+            </div>
+
         </div>
     );
 };

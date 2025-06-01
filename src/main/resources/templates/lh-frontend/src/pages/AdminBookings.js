@@ -118,6 +118,16 @@ const AdminBookings = () => {
         const year = date.getFullYear();
         return `${day}-${month}-${year}`;
     };
+    const completeBooking = async (id) => {
+        try {
+            await axios.post(`http://localhost:8080/admin/bookings/${id}/complete`, {}, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            fetchBookings(); // оновлення списку після зміни
+        } catch (error) {
+            console.error("Failed to complete booking:", error);
+        }
+    };
 
 
     return (
@@ -141,7 +151,7 @@ const AdminBookings = () => {
                 {bookings.map(b => (
                     <tr key={b.id}>
                         <td>{b.id}</td>
-                        <td>{b.room || "—"}</td>
+                        <td>{b.roomNumber || "N/A"}</td>
                         <td>{formatDate(b.startDate)} ➜ {formatDate(b.endDate)}</td>
                         <td>{b.price} грн</td>
                         <td>{b.phone}</td>
@@ -155,7 +165,16 @@ const AdminBookings = () => {
                                     <button onClick={() => cancelBooking(b.id)}>❌ Скасувати</button>
                                 </>
                             )}
+                            {b.status === "CONFIRMED" && (
+                                <>
+                                    <button onClick={() => completeBooking(b.id)}>✅ Завершити</button>
+                                    {" "}
+                                    <button onClick={() => cancelBooking(b.id)}>❌ Скасувати</button>
+                                </>
+                            )}
                         </td>
+
+
                     </tr>
                 ))}
                 </tbody>

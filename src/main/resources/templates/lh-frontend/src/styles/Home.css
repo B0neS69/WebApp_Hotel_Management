@@ -1,0 +1,144 @@
+.home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+    text-align: center;
+}
+
+.home-container h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #005fa3;
+}
+
+.home-container p {
+    font-size: 18px;
+    margin-bottom: 20px;
+
+}
+.p-container{
+    color: white;
+}
+.home-container .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #0077cc;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.home-container .btn:hover {
+    background-color: #005fa3;
+}
+
+/* Заголовки секцій */
+.home-container h2 {
+    font-size: 28px;
+    margin: 40px 0 20px;
+    color: #333;
+}
+
+/* Картка номера */
+.slick-slide > div {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.slick-slide h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.slick-slide img {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-height: 400px;
+    object-fit: cover;
+}
+.slick-slider {
+    user-select: none;
+}
+.carousel-slide {
+    display: block;
+    text-decoration: none !important;
+    color: inherit;
+    transition: transform 0.3s ease;
+
+}
+
+.carousel-slide:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+/* Відгуки */
+.review-card {
+    background-color: #f9f9f9;
+    padding: 16px;
+    margin: 0 auto 16px;
+    border-radius: 8px;
+    max-width: 700px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+.reviews-marquee {
+    overflow: hidden;
+    position: relative;
+
+}
+
+.reviews-track {
+    display: flex;
+    width: max-content;
+    animation: scroll-left 25s linear infinite;
+}
+
+.review-card.moving {
+    min-width: 300px;
+    max-width: 400px;
+    padding: 16px 24px;
+    margin: 10px 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card.moving:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+.section-box {
+    background-color: #f2f6fc;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-top: 20px;
+}
+
+.section-box h2{
+    margin: 0px;
+}
+/* Стилізація стрілок навігації */
+.slick-prev:before,
+.slick-next:before {
+    color: #212427; /* синій */
+    font-size: 20px;
+    transition: opacity 0.3s, transform 0.3s;
+}

@@ -1,16 +1,17 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 :root {
-  --background-color: #F5F7FA;        /* теплий сірувато-білий */
-  --text-color: #37474F;              /* графітово-сірий */
-  --heading-color: #455A64;           /* темний, але тепліший */
-  --button-color: #6C8EA6;            /* приглушений теплий синьо-сірий */
-  --button-hover-color: #8FB2C9;      /* м’який блакитно-сірий */
-  --border-accent-color: #D0E2ED;     /* дуже світлий пастельний */
+  --background-color: #F2F2F2;        /* світлий фон, злегка теплий */
+  --text-color: #223440;              /* насичений темний сірий/синюватий для тексту */
+  --heading-color: #aeeaff;           /* темний глибокий фіолетово-синій для заголовків */
+  --button-color: #5D7A8C;            /* стриманий синьо-сірий для кнопок */
+  --button-hover-color: #BACBD9;      /* м’який світлий блакитно-сірий для hover */
+  --border-accent-color: #BACBD9;     /* той самий ніжний акцент для бордерів */
 }
+
 /* Базовий фон і шрифт */
 body {
-  background-color: var(--background-color) !important;
+  background: linear-gradient(135deg, #324557, #5D7A8C) !important;
   color: var(--text-color);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
@@ -18,10 +19,12 @@ body {
 }
 
 /* Заголовки */
-h1, h2, h3, h4, h5, h6 {
+h1 {
   color: var(--heading-color) !important;
 }
-
+h2, h3, h4, h5, h6 {
+  color: #000000 !important;
+}
 /* Кнопки */
 
 
@@ -49,13 +52,17 @@ tr:nth-child(even) {
 }
 
 /* Посилання */
-a {
-  color: var(--button-color) !important;
-  text-decoration: none;
-}
+
 
 a:hover {
   color: var(--button-hover-color) !important;
   text-decoration: underline;
 }
 
+footer{
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  padding: 20px;
+
+}

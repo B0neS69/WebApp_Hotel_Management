@@ -1,5 +1,6 @@
 package com.luxhost.hotel.controller;
 
+import com.luxhost.hotel.dto.BookingWithRoomNumberDTO;
 import com.luxhost.hotel.model.Booking;
 import com.luxhost.hotel.model.BookingStatus;
 import com.luxhost.hotel.repository.BookingRepository;
@@ -38,18 +39,33 @@ public class BookingController {
         return bookingService.saveBooking(booking);
     }
     @GetMapping("/user/{userId}")
-    public List<Booking> getBookings(@PathVariable Long userId) {
-        return bookingService.getBookingsForUser(userId);
+    public List<BookingWithRoomNumberDTO> getBookingsForUser(@PathVariable Long userId) {
+        List<Booking> bookings = bookingService.getBookingsForUser(userId);
+        return bookings.stream()
+                .map(booking -> {
+                    String roomNumber = booking.getRoom() != null ? booking.getRoom().getRoomNumber() : "N/A";
+                    return new BookingWithRoomNumberDTO(
+                            booking.getId(),
+                            booking.getStartDate(),
+                            booking.getEndDate(),
+                            booking.getStatus(),
+                            booking.getRoom() != null ? booking.getRoom().getId() : null,
+                            roomNumber
+                    );
+                })
+                .toList();
     }
 
     // 🔽 Новий ендпоінт
     @GetMapping("/room/{roomId}/booked-dates")
     public List<Map<String, LocalDate>> getBookedDates(@PathVariable Long roomId) {
-        List<Booking> bookings = bookingRepository.findByRoomId(roomId);
+        List<BookingStatus> activeStatuses = List.of(BookingStatus.PENDING, BookingStatus.CONFIRMED);
+        List<Booking> bookings = bookingRepository.findByRoomIdAndStatusIn(roomId, activeStatuses);
         return bookings.stream()
                 .map(b -> Map.of("start", b.getStartDate(), "end", b.getEndDate()))
                 .toList();
     }
+
 
     @PutMapping("/cancel/{bookingId}")
     public ResponseEntity<String> cancelBooking(@PathVariable Long bookingId) {
@@ -80,8 +96,21 @@ public class BookingController {
 
     @GetMapping("/all")
     @PreAuthorize("hasRole('ADMIN')")
-    public List<Booking> getAllBookings() {
-        return bookingService.getAllBookings();
+    public List<BookingWithRoomNumberDTO> getAllBookings() {
+        List<Booking> bookings = bookingService.getAllBookings();
+        return bookings.stream()
+                .map(booking -> {
+                    String roomNumber = booking.getRoom() != null ? booking.getRoom().getRoomNumber() : "N/A";
+                    return new BookingWithRoomNumberDTO(
+                            booking.getId(),
+                            booking.getStartDate(),
+                            booking.getEndDate(),
+                            booking.getStatus(),
+                            booking.getRoom().getId(),
+                            roomNumber
+                    );
+                })
+                .toList();
     }
 
     @PutMapping("/admin/complete/{bookingId}")

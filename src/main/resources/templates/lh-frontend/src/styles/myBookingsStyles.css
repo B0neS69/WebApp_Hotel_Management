@@ -1,0 +1,27 @@
+:root {
+    --background-color: #F2F2F2;
+    --text-color: #223440;
+    --heading-color: #e0e0e0;
+    --button-color: #5D7A8C;
+    --button-hover-color: #BACBD9;
+    --accent-bg: #BACBD9;
+    --border-color: #D0E2ED;
+}
+
+.my-bookings-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(34, 52, 64, 0.15);
+}
+
+.my-bookings-container h2 {
+    color: var(--heading-color);
+    margin-bottom: 20px;
+}
+
+

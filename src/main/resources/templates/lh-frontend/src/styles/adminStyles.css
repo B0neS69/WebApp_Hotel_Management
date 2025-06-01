@@ -1,0 +1,345 @@
+:root {
+    --background-color: #F2F2F2;
+    --text-color: #223440;
+    --heading-color: #e0e0e0;
+    --button-color: #5D7A8C;
+    --button-hover-color: #BACBD9;
+    --accent-bg: #BACBD9;
+    --border-color: #D0E2ED;
+}
+
+.admin-container,
+.admin-bookings-container,
+.admin-statistics-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(34, 52, 64, 0.15);
+}
+
+/* Заголовки */
+.admin-container h2,
+.admin-bookings-container h2,
+.admin-statistics-container h2 {
+    color: var(--heading-color);
+    margin-bottom: 20px;
+}
+
+.admin-container h3,
+.admin-bookings-container h3,
+.admin-statistics-container h3 {
+    color: var(--button-color);
+    margin-bottom: 15px;
+}
+
+/* Таблиці */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    font-size: 1.1rem;
+}
+
+thead tr {
+    background-color: var(--accent-bg);
+    color: var(--heading-color);
+    text-align: left;
+    font-weight: 600;
+}
+
+tbody tr {
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(34, 52, 64, 0.1);
+}
+
+th, td {
+    padding: 12px 16px;
+    border: none;
+}
+
+/* Кнопки */
+button {
+    background-color: var(--button-color);
+    color: #ffffff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--button-hover-color);
+    color: var(--heading-color);
+}
+
+/* Інпут поля */
+.form-input,
+.form-textarea,
+select,
+input[type="tel"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    border: 1px solid var(--accent-bg);
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: var(--text-color);
+    font-size: 1rem;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+select:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus {
+    border-color: var(--heading-color);
+    outline: none;
+}
+
+/* Чекбокси */
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 14px;
+}
+
+.checkbox-group label {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 16px;
+    font-weight: 500;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 6px;
+    cursor: pointer;
+}
+
+/* Зображення кімнат */
+.room-image {
+    border-radius: 6px;
+    box-shadow: 0 1px 6px rgba(34, 52, 64, 0.3);
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.room-image:hover {
+    transform: scale(1.05);
+}
+
+/* Модальні вікна */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(34, 52, 64, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 900px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 0 18px rgba(34, 52, 64, 0.25);
+}
+
+.modal-images {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.modal-image {
+    max-width: 250px;
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(34, 52, 64, 0.3);
+}
+
+.close-button {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    color: var(--heading-color);
+    float: right;
+}
+
+/* Статистика */
+.admin-statistics-container ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.admin-statistics-container ul li {
+    margin-bottom: 6px;
+    font-size: 1.1rem;
+}
+
+/* Секції */
+.admin-statistics-container > div {
+    margin-bottom: 40px;
+}
+
+/* Таблиця номерів */
+.room-table {
+    max-width: 1200px;
+    margin: 40px auto;
+    background-color: var(--background-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(34, 52, 64, 0.2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+}
+
+.room-table h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--heading-color);
+    font-size: 1.8rem;
+}
+
+.room-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.room-table thead {
+    background-color: var(--accent-bg);
+    color: var(--heading-color);
+}
+
+.room-table thead th {
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.room-table tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: top;
+}
+
+.room-table tbody tr:hover {
+    background-color: #f5f7fa;
+}
+
+.room-table ul {
+    padding-left: 18px;
+    margin: 0;
+}
+
+.room-table .room-image {
+    border-radius: 4px;
+    transition: transform 0.2s ease;
+}
+
+.room-table .room-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+}
+
+.delete-button {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: #c9302c;
+}
+
+
+.preview-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.preview-item {
+    position: relative;
+}
+
+.preview-image {
+    width: 100px;
+    height: 70px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.remove-preview {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+
+/* Стиль для DatePicker */
+.react-datepicker-wrapper {
+    display: inline-block;
+    margin: 10px 10px 10px 0;
+}
+
+.react-datepicker__input-container input {
+    width: 200px;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: white;
+    color: var(--text-color);
+    box-shadow: 0 1px 2px rgba(34, 52, 64, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+.react-datepicker__input-container input:focus {
+    outline: none;
+    border-color: var(--button-color);
+    box-shadow: 0 0 0 2px rgba(93, 122, 140, 0.2);
+}
+

@@ -58,6 +58,25 @@ const AdminStatistics = () => {
             }
         ]
     };
+    const handleExportExcel = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/admin/statistics/export', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                responseType: 'blob'  // ⬅️ ключове для отримання файлу
+            });
+
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'statistics.xlsx');
+            document.body.appendChild(link);
+            link.click();
+        } catch (error) {
+            console.error("Помилка при експорті в Excel:", error);
+        }
+    };
 
     const chartOptions = {
         responsive: true,
@@ -119,6 +138,19 @@ const AdminStatistics = () => {
                     <p>Немає даних для відображення</p>
                 )}
             </div>
+            <div style={{marginBottom: "20px"}}>
+                <button onClick={handleExportExcel} style={{
+                    padding: "10px 20px",
+                    backgroundColor: "#4CAF50",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "5px",
+                    cursor: "pointer"
+                }}>
+                    📥 Експортувати в Excel
+                </button>
+            </div>
+
         </div>
     );
 };

@@ -50,4 +50,14 @@ public class AuthController {
         return new AuthResponse(token, user.getEmail(), user.getRole().name(), user.getUsername());
     }
 
+    @GetMapping("/check-username")
+    public boolean checkUsernameAvailability(@RequestParam String username) {
+        return userService.findUserByUsername(username).isEmpty();
+    }
+
+    @GetMapping("/check-email")
+    public boolean checkEmailAvailability(@RequestParam String email) {
+        return userService.findUserByEmail(email).isEmpty();
+    }
+
 }

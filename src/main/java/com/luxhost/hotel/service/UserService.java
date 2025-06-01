@@ -21,13 +21,18 @@ public class UserService {
         if (userRepository.findByUsername(username).isPresent()) {
             throw new IllegalArgumentException("Користувач із таким іменем вже існує!");
         }
+
         if (userRepository.findByEmail(email).isPresent()) {
             throw new IllegalArgumentException("Користувач із таким email вже існує!");
         }
 
+        if (!isValidPassword(password)) {
+            throw new IllegalArgumentException("Пароль має містити щонайменше 8 символів, включаючи літери та цифри.");
+        }
+
         User user = new User();
         user.setUsername(username);
-        user.setEmail(email); // 🔹 Додаємо email
+        user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password));
         user.setRole(Role.USER);
         user.setFirstName(firstName);
@@ -35,6 +40,13 @@ public class UserService {
         user.setPhone(phone);
         userRepository.save(user);
     }
+
+    // Метод для перевірки пароля
+    private boolean isValidPassword(String password) {
+        // Пароль повинен містити мінімум 8 символів, принаймні одну букву і одну цифру
+        return password != null && password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
+    }
+
 
     public void registerAdmin(String username, String email, String password) {
         User admin = new User();

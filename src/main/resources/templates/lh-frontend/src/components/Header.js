@@ -25,6 +25,7 @@ const Header = () => {
                         <Link to="/adminadd">Панель адміністратора</Link>
                         <Link to="/admin/statistics">Статистика</Link>
                         <Link to="/admin/bookings">Бронювання</Link>
+                        <Link to="/account">Мій акаунт</Link>
                     </>
                 )}
 
@@ -43,7 +44,7 @@ const Header = () => {
                     <>
                         <p>👋 Вітаю, <strong>{username}</strong> ({email})</p>
                         <button className="logout-button" onClick={handleLogout}>
-                            Logout
+                            Вийти
                         </button>
                     </>
                 )}

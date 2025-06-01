@@ -15,6 +15,7 @@ export default function AdminPanel() {
         amenities: [],
         guestCapacity: 1
     });
+    const [previewImages, setPreviewImages] = useState([]);
 
     const [imageFiles, setImageFiles] = useState([]);
     const [rooms, setRooms] = useState([]);
@@ -189,10 +190,41 @@ export default function AdminPanel() {
                     className="form-input"
                     type="file"
                     multiple
-                    onChange={e => setImageFiles(Array.from(e.target.files))}
+                    onChange={e => {
+                        const files = Array.from(e.target.files);
+                        setImageFiles(files);
+
+                        // Створення попередніх переглядів
+                        const previews = files.map(file => ({
+                            file,
+                            url: URL.createObjectURL(file)
+                        }));
+                        setPreviewImages(previews);
+                    }}
                 />
+                <div className="preview-container">
+                    {previewImages.map((img, index) => (
+                        <div key={index} className="preview-item">
+                            <img src={img.url} alt={`preview-${index}`} className="preview-image"/>
+                            <button
+                                className="remove-preview"
+                                onClick={() => {
+                                    const updatedFiles = imageFiles.filter((_, i) => i !== index);
+                                    const updatedPreviews = previewImages.filter((_, i) => i !== index);
+
+                                    setImageFiles(updatedFiles);
+                                    setPreviewImages(updatedPreviews);
+                                }}
+                            >
+                                ✖
+                            </button>
+                        </div>
+                    ))}
+                </div>
+
                 <button className="submit-button" onClick={addRoom}>Додати номер</button>
             </div>
+
         </div>
             <div className="room-table">
                 <h2>Список номерів</h2>

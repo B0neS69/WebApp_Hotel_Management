@@ -3,6 +3,8 @@ package com.luxhost.hotel.service;
 import com.luxhost.hotel.model.Booking;
 import com.luxhost.hotel.model.BookingStatus;
 import com.luxhost.hotel.repository.BookingRepository;
+import jakarta.annotation.PostConstruct;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -34,10 +36,13 @@ public class BookingService {
 
         // Перевірка на конфлікт дат перед збереженням
         List<Booking> existing = bookingRepository.findByRoomId(room.getId());
-        boolean conflict = existing.stream().anyMatch(b ->
-                booking.getStartDate().isBefore(b.getEndDate()) &&
-                        booking.getEndDate().isAfter(b.getStartDate())
-        );
+        boolean conflict = existing.stream()
+                .filter(b -> b.getStatus() != BookingStatus.COMPLETED)
+                // Ігнорувати завершені бронювання
+                .anyMatch(b ->
+                        booking.getStartDate().isBefore(b.getEndDate()) &&
+                                booking.getEndDate().isAfter(b.getStartDate())
+                );
 
         if (conflict) {
             throw new IllegalArgumentException("Обрані дати вже зайняті для цього номера.");
@@ -55,8 +60,10 @@ public class BookingService {
         if (booking.getCreatedBy() == null) {
             booking.setCreatedBy("USER");
         }
+
         return bookingRepository.save(booking);
     }
+
 
 
     public boolean cancelBooking(Long bookingId) {
@@ -94,7 +101,7 @@ public class BookingService {
         }
         return false;
     }
-
+    @Scheduled(cron = "0 0 1 * * *")
     public void autoCompleteBookings() {
         List<Booking> confirmedBookings = bookingRepository.findByStatus(BookingStatus.CONFIRMED);
         LocalDate today = LocalDate.now();
@@ -105,7 +112,10 @@ public class BookingService {
             }
         }
     }
-
+    @PostConstruct
+    public void init() {
+        autoCompleteBookings(); // запуск при старті додатку
+    }
     public boolean completeBookingByAdmin(Long bookingId) {
         Optional<Booking> bookingOpt = bookingRepository.findById(bookingId);
         if (bookingOpt.isPresent()) {

@@ -1,0 +1,296 @@
+.room-details {
+    max-width: 1200px;
+    margin: 40px auto;
+    color: #333;
+    background-color: #f2f6fc;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.room-header {
+    margin-bottom: 30px;
+}
+
+.room-header h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+}
+
+.room-header p {
+    font-size: 18px;
+    color: #666;
+}
+
+.room-main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.room-gallery {
+    flex: 1 1 45%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.room-gallery img {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+    transition: transform 0.3s;
+}
+
+.room-gallery img:hover {
+    transform: scale(1.05);
+}
+
+.room-info {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.room-info h3 {
+    font-size: 22px;
+    margin-top: 15px;
+}
+
+.room-info p,
+.room-info li {
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.room-info ul {
+    list-style: disc;
+    margin-left: 20px;
+}
+
+.booking-section {
+    margin-top: 20px;
+}
+
+.booking-section button {
+    padding: 12px 24px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.booking-section button:hover {
+    background-color: #0056b3;
+}
+
+.auth-warning {
+    margin-top: 10px;
+    color: #d9534f;
+    font-size: 16px;
+}
+
+.auth-warning span {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.reviews-section {
+    margin-top: 40px;
+}
+
+.reviews-section h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.reviews-section ul {
+    padding-left: 20px;
+}
+
+.reviews-section li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #f4f4f4;
+    border-radius: 6px;
+}
+
+.review-form {
+    margin-top: 20px;
+    background-color: #f8f9fa;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.review-form input,
+.review-form textarea,
+.review-form select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.review-form button {
+    margin-top: 15px;
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.review-form button:hover {
+    background-color: #218838;
+}
+
+.top-section {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.gallery-column {
+    flex: 2;
+    min-width: 400px;
+    max-height: 500px;
+}
+.info-column {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.bottom-section {
+    border-top: 1px solid #ddd;
+    padding-top: 30px;
+}
+
+.room-details h2 {
+    font-size: 32px;
+    color: #222;
+    margin-bottom: 15px;
+}
+
+.room-details h3 {
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.room-details p {
+    font-size: 18px;
+    color: #444;
+    line-height: 1.5;
+}
+
+.room-details ul {
+    padding-left: 20px;
+    list-style-type: disc;
+    margin-top: 5px;
+}
+
+
+
+/* Блоки */
+.room-description,
+.room-features,
+.room-meals,
+.room-booking,
+.room-reviews {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Зручності - список */
+.room-features ul {
+    list-style-type: square;
+    padding-left: 20px;
+}
+
+/* Кнопка бронювання */
+.room-booking button {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.room-booking button:hover {
+    background-color: #2980b9;
+}
+
+/* Відгуки */
+.room-reviews {
+    padding: 20px;
+    background-color: #fafafa;
+    border-radius: 10px;
+    margin-top: 30px;
+    text-align: left;
+}
+
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Вирівнює елементи по лівому краю */
+
+}
+
+.review-card {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    text-align: left; /* гарантує, що текст всередині по лівому краю */
+    margin: 15px;
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.review-rating {
+    font-weight: bold;
+    color: #3498db;
+    font-size: 1rem;
+}
+
+.review-author {
+    color: #333;
+    font-size: 1rem;
+}
+
+.review-comment {
+    font-size: 0.95rem;
+    color: #444;
+    line-height: 1.4;
+}

@@ -9,6 +9,20 @@ public class RegisterRequest {
     private String lastName;
     private String phone; // опціонально
 
+    public RegisterRequest(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
+    public RegisterRequest(String username, String email, String password, String firstName, String lastName, String phone) {
+        this.username = username;
+        this.phone = phone;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.password = password;
+        this.email = email;
+    }
     // Геттери та сеттери
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
