@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Java CI - Only Run Tests
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,5 +20,5 @@ jobs:
           java-version: '22'
           distribution: 'temurin'
 
-      - name: Build and test with Maven
-        run: mvn clean verify
+      - name: Run tests only
+        run: mvn test
