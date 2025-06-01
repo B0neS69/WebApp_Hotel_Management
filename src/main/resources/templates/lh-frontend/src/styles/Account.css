@@ -1,0 +1,95 @@
+.account-container {
+    width: 700px;
+    margin-top: 100px;
+    margin-left: 200px;
+    margin-bottom: 100px;
+    padding: 24px;
+    background: #ffffff;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+
+.account-container h2,
+.account-container h3 {
+    color: #333;
+    margin-bottom: 12px;
+}
+
+.account-container p {
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+.account-container label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #444;
+}
+
+.account-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.account-container button {
+    padding: 10px 16px;
+    margin-right: 10px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s ease;
+}
+
+.account-container button:hover {
+    opacity: 0.9;
+}
+
+.account-container button:nth-child(1) {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.account-container button:nth-child(2) {
+    background-color: #f44336;
+    color: white;
+}
+
+.account-container button:last-of-type {
+    background-color: #007BFF;
+    color: white;
+}
+
+.account-container hr {
+    margin: 24px 0;
+    border: none;
+    height: 1px;
+    background-color: #ddd;
+}
+
+@media (max-width: 768px) {
+    .account-container {
+        width: auto;
+        margin-left: 16px;
+        margin-right: 16px;
+        padding: 16px;
+    }
+}
+
+
+.password-section {
+    max-width: 400px;
+}
+
+.password-section input {
+    width: 100%;
+}
+
