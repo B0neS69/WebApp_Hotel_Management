@@ -83,7 +83,7 @@ export default function AdminPanel() {
                 }
             });
 
-            alert("Room added!");
+            alert("Номер успішно створено!");
             fetchRooms();
         } catch (err) {
             console.error(err);

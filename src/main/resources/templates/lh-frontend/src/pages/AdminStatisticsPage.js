@@ -21,7 +21,7 @@ const AdminStatistics = () => {
 
     const fetchStatistics = async () => {
         try {
-            const [roomBookingsRes, revenueStatsRes, confirmedRes, pendingRes, cancelledRes] = await Promise.all([
+            const [roomBookingsRes, revenueStatsRes, confirmedRes, pendingRes, cancelledRes, roomsRes] = await Promise.all([
                 axios.get('http://localhost:8080/admin/statistics/room-active-bookings', {
                     headers: { Authorization: `Bearer ${token}` }
                 }),
@@ -37,6 +37,9 @@ const AdminStatistics = () => {
                 axios.get('http://localhost:8080/admin/statistics/bookings/cancelled', {
                     headers: { Authorization: `Bearer ${token}` }
                 }),
+                axios.get('http://localhost:8080/admin/rooms', {
+                    headers: { Authorization: `Bearer ${token}` }
+                }),
             ]);
 
             setRoomStats(roomBookingsRes.data);
@@ -44,12 +47,21 @@ const AdminStatistics = () => {
             setConfirmedCount(confirmedRes.data);
             setPendingCount(pendingRes.data);
             setCancelledCount(cancelledRes.data);
+            setRooms(roomsRes.data); // 👈 тут важливо
         } catch (err) {
             console.error("Помилка при отриманні статистики:", err);
         }
     };
+
+
+    const [rooms, setRooms] = useState([]);
+
+
     const chartData = {
-        labels: Object.keys(roomStats),
+        labels: Object.keys(roomStats).map(roomId => {
+            const room = rooms?.find(r => r.id.toString() === roomId);
+            return room ? `${room.number || room.roomName}` : `ID ${roomId}`;
+        }),
         datasets: [
             {
                 label: 'Кількість активних бронювань на номер',
@@ -58,6 +70,8 @@ const AdminStatistics = () => {
             }
         ]
     };
+
+
     const handleExportExcel = async () => {
         try {
             const response = await axios.get('http://localhost:8080/admin/statistics/export', {
@@ -100,7 +114,7 @@ const AdminStatistics = () => {
 
 
             <div style={{marginBottom: "40px"}}>
-                <h3>🔹 Активні бронювання по кожному номеру:</h3>
+                <h3>🔹 Підтверджені бронювання по кожному номеру:</h3>
                 {Object.keys(roomStats).length > 0 ? (
                     <Bar data={chartData} options={chartOptions}/>
                 ) : (

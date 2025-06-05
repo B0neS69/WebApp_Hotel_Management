@@ -36,14 +36,7 @@ class AuthControllerTest {
     public AuthControllerTest() {
         org.mockito.MockitoAnnotations.openMocks(this);
     }
-//    public RegisterRequest(String username, String email, String password, String firstName, String lastName, String phone) {
-//        this.username = username;
-//        this.phone = phone;
-//        this.lastName = lastName;
-//        this.firstName = firstName;
-//        this.password = password;
-//        this.email = email;
-//    }
+
     @Test
     void testRegisterUser() {
         RegisterRequest request = new RegisterRequest("user", "user@email.com", "password", "John", "Doe", "123456");

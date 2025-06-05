@@ -49,7 +49,9 @@ public class BookingController {
                             booking.getStartDate(),
                             booking.getEndDate(),
                             booking.getStatus(),
-                            booking.getRoom() != null ? booking.getRoom().getId() : null,
+                            booking.getPrice(),
+                            booking.getPhone(),
+                            booking.getRoom().getId(),
                             roomNumber
                     );
                 })
@@ -106,6 +108,8 @@ public class BookingController {
                             booking.getStartDate(),
                             booking.getEndDate(),
                             booking.getStatus(),
+                            booking.getPrice(),
+                            booking.getPhone(),
                             booking.getRoom().getId(),
                             roomNumber
                     );

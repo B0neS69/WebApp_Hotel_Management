@@ -33,10 +33,9 @@ const AdminBookings = () => {
         const res = await axios.get("http://localhost:8080/api/bookings/all", {
             headers: { Authorization: `Bearer ${token}` }
         });
-        console.log(res.data);
-        setBookings(res.data);
+        const sorted = res.data.sort((a, b) => b.id - a.id); // Сортування за спаданням
+        setBookings(sorted);
     };
-
     const fetchRooms = async () => {
         const res = await axios.get("http://localhost:8080/admin/rooms", {
             headers: { Authorization: `Bearer ${token}` }
@@ -63,6 +62,14 @@ const AdminBookings = () => {
         const days = Math.ceil((formData.endDate - formData.startDate) / (1000 * 60 * 60 * 24));
         return days > 0 ? days * room.price : "";
     };
+    const toDateOnlyString = (date) => {
+        const adjusted = new Date(Date.UTC(
+            date.getFullYear(),
+            date.getMonth(),
+            date.getDate()
+        ));
+        return adjusted.toISOString().split("T")[0];
+    };
 
     const createBooking = async () => {
         const price = calculatePrice();
@@ -77,9 +84,10 @@ const AdminBookings = () => {
             });
 
             const userId = userRes.data.id;
+
             await axios.post("http://localhost:8080/api/bookings/admin/create-booking", {
-                startDate: formData.startDate,
-                endDate: formData.endDate,
+                startDate: toDateOnlyString(formData.startDate),
+                endDate: toDateOnlyString(formData.endDate),
                 email: formData.email,
                 phone: formData.phone,
                 user: { id: userId },

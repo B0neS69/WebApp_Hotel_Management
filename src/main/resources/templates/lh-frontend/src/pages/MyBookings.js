@@ -17,12 +17,13 @@ const MyBookings = () => {
                 headers: { Authorization: `Bearer ${token}` }
             });
         }).then(res => {
-            setBookings(res.data);
-            console.log(res.data)
+            const sortedBookings = res.data.sort((a, b) => b.id - a.id); // 🔽 Новіші зверху
+            setBookings(sortedBookings);
         }).catch(err => {
             console.error("Помилка завантаження бронювань:", err);
         });
     }, []);
+
 
     const handleCancel = async (bookingId) => {
         try {
@@ -66,7 +67,7 @@ const MyBookings = () => {
                 <table>
                     <thead>
                     <tr>
-                        <th>ID</th>
+
                         <th>Номер</th>
                         <th>Дата заїзду</th>
                         <th>Дата виїзду</th>
@@ -78,7 +79,7 @@ const MyBookings = () => {
                     <tbody>
                     {bookings.map(booking => (
                         <tr key={booking.id}>
-                            <td>{booking.id}</td>
+
                             <td>{booking.roomNumber}</td>
                             <td>{formatDate(booking.startDate)}</td>
                             <td>{formatDate(booking.endDate)}</td>

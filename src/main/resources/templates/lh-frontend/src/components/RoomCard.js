@@ -18,7 +18,7 @@ const RoomCard = ({ room }) => {
         <div className="room-card">
             {/* Обгортка для клікабельності і назви, і картинки */}
             <div onClick={handleNavigate} style={{ cursor: "pointer" }}>
-                <h3>{room.type}</h3>
+                <h3>{room.roomName}</h3>
                 {mainImage && (
                     <img
                         className="room-main-image"

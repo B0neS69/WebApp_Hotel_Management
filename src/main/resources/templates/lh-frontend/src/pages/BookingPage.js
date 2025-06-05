@@ -49,6 +49,15 @@ const BookingPage = () => {
         });
     };
 
+    const toDateOnlyString = (date) => {
+        const adjusted = new Date(Date.UTC(
+            date.getFullYear(),
+            date.getMonth(),
+            date.getDate()
+        ));
+        return adjusted.toISOString().split("T")[0];
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -60,8 +69,8 @@ const BookingPage = () => {
             const userId = userRes.data.id;
 
             await axios.post("http://localhost:8080/api/bookings", {
-                startDate: form.startDate,
-                endDate: form.endDate,
+                startDate: toDateOnlyString(form.startDate),
+                endDate: toDateOnlyString(form.endDate),
                 email: form.email,
                 phone: form.phone,
                 user: { id: userId },
@@ -69,7 +78,6 @@ const BookingPage = () => {
             }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
-
             alert("Номер успішно заброньовано!");
             navigate("/account");
         } catch (err) {
@@ -80,18 +88,17 @@ const BookingPage = () => {
 
     return (
         <div className="booking-container">
-
             <h2>Оформлення бронювання номера #{roomId}</h2>
             <form onSubmit={handleSubmit}>
                 <label>Ім'я:</label>
-                <input value={user.name} disabled/>
+                <input value={user.name} disabled />
 
                 <label>Email:</label>
                 <input
                     type="email"
                     name="email"
                     value={form.email}
-                    onChange={(e) => setForm({...form, email: e.target.value})}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
                     required
                 />
 
@@ -100,14 +107,14 @@ const BookingPage = () => {
                     type="tel"
                     name="phone"
                     value={form.phone}
-                    onChange={(e) => setForm({...form, phone: e.target.value})}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
                     required
                 />
 
                 <label>Дата заїзду:</label>
                 <DatePicker
                     selected={form.startDate}
-                    onChange={(date) => setForm({...form, startDate: date})}
+                    onChange={(date) => setForm({ ...form, startDate: date })}
                     filterDate={(date) => !isDateDisabled(date)}
                     minDate={new Date()}
                     placeholderText="Оберіть дату заїзду"
@@ -117,7 +124,7 @@ const BookingPage = () => {
                 <label>Дата виїзду:</label>
                 <DatePicker
                     selected={form.endDate}
-                    onChange={(date) => setForm({...form, endDate: date})}
+                    onChange={(date) => setForm({ ...form, endDate: date })}
                     filterDate={(date) => {
                         return (
                             !isDateDisabled(date) &&
@@ -129,7 +136,7 @@ const BookingPage = () => {
                     dateFormat="yyyy-MM-dd"
                 />
 
-                <button type="submit" style={{marginTop: "12px"}}>
+                <button type="submit" style={{ marginTop: "12px" }}>
                     Підтвердити бронювання
                 </button>
             </form>

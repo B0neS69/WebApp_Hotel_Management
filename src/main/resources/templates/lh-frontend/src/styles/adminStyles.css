@@ -307,17 +307,20 @@ input[type="number"]:focus {
 .remove-preview {
     position: absolute;
     top: -5px;
-    right: -5px;
-    background: red;
+    right: -3px;
     color: white;
     border: none;
     border-radius: 50%;
     width: 20px;
     height: 20px;
     cursor: pointer;
+    opacity: 100%;
+    background-color: transparent;
 }
 
-
+.remove-preview:hover {
+    background-color: transparent;
+}
 /* Стиль для DatePicker */
 .react-datepicker-wrapper {
     display: inline-block;

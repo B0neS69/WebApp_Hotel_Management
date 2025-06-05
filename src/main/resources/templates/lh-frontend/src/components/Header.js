@@ -29,7 +29,7 @@ const Header = () => {
                     </>
                 )}
 
-                {role === "USER" && <Link to="/account">Мої бронювання</Link>}
+                {role === "USER" && <Link to="/account">Мій профіль</Link>}
 
                 {!username && (
                     <>

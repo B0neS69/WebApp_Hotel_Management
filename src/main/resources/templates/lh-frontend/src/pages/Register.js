@@ -65,7 +65,7 @@ function Register() {
             const result = await response.text();
 
             if (response.ok) {
-                setSuccessMessage("Реєстрація успішна!");
+                alert("Реєстрація успішна!");
                 setUsername("");
                 setEmail("");
                 setPassword("");

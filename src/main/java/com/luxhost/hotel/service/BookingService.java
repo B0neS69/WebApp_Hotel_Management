@@ -6,7 +6,6 @@ import com.luxhost.hotel.repository.BookingRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.List;
 import com.luxhost.hotel.discount.Discount;
@@ -37,12 +36,13 @@ public class BookingService {
         // Перевірка на конфлікт дат перед збереженням
         List<Booking> existing = bookingRepository.findByRoomId(room.getId());
         boolean conflict = existing.stream()
-                .filter(b -> b.getStatus() != BookingStatus.COMPLETED)
+                .filter(b -> b.getStatus() != BookingStatus.COMPLETED && b.getStatus() != BookingStatus.CANCELED)
                 // Ігнорувати завершені бронювання
                 .anyMatch(b ->
                         booking.getStartDate().isBefore(b.getEndDate()) &&
                                 booking.getEndDate().isAfter(b.getStartDate())
                 );
+
 
         if (conflict) {
             throw new IllegalArgumentException("Обрані дати вже зайняті для цього номера.");

@@ -10,16 +10,35 @@ public class BookingWithRoomNumberDTO {
     private BookingStatus status;
     private Long roomId;
     private String roomNumber;
+    private double price;
+    private String phone;
 
 
-
-    public BookingWithRoomNumberDTO(Long id, LocalDate startDate, LocalDate endDate, BookingStatus status, Long roomId, String roomNumber) {
+    public BookingWithRoomNumberDTO(Long id, LocalDate startDate, LocalDate endDate, BookingStatus status, double price, String phone, Long roomId,String roomNumber) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
         this.roomId = roomId;
+        this.price = price;
+        this.phone = phone;
         this.roomNumber = roomNumber;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public Long getId() {
